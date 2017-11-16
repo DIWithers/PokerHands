@@ -9,13 +9,23 @@ export class PokerHandRank {
             "9": "Nine"
         }
 
-        let highestCard: any = this.sortCards(cards)[0][0];
+        let highestCard: any = this.sortCardsHighestToLowest(cards)[0][0];
         console.log(highestCard);
         return "High Card: " + cardRankWord[highestCard];
     }
 
-    public static sortCards(cardsToSort: string): any {
+    public static sortCardsHighestToLowest(cardsToSort: string): any {
+        console.log(cardsToSort.split(" ").sort().reverse());
         return cardsToSort.split(" ").sort().reverse();
     }
-
+    private static isPair(sortedCards: string): boolean {
+        console.log(sortedCards);
+        return sortedCards[0][0] === sortedCards[1][0];
+    }
+    public static findRank(cards: any): string {
+        let sortedCards: string = this.sortCardsHighestToLowest(cards);
+        if (this.isPair(sortedCards)) {
+            return "Pair";
+        }
+    }
 }
