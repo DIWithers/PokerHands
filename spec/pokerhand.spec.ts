@@ -7,9 +7,6 @@ describe("function name", () => {
     it("should determine highest value card with 8", () => {
         expect(PokerHand.findRank("2C 3H 4S 8C 5H")).toBe("High Card: Eight");
     });
-    xit("should determine highest value card with 9", () => {
-        expect(PokerHand.findRank("2C 3H 4S 9C 5H")).toBe("High Card: Nine");
-    });
     xit("should determine if highest rank is pair(2 cards of same value)", () => {
         expect(PokerHand.findRank("2C 4H 4S 3C 9H")).toBe("Pair");
     });
