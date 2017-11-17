@@ -2,6 +2,16 @@ export class PokerHand {
 
     static findRank(cards: string): string {
         let sortedCards: any = cards.split(" ").sort().reverse();
+        let consecutiveHops: number = this.findConsecutiveHops(sortedCards);
+        console.log(consecutiveHops);
+        if (consecutiveHops === 1) {
+            return "Pair";
+        }
+
+        return this.findHighestCard(sortedCards);
+    }
+
+    private static findConsecutiveHops(sortedCards: any) {
         let consecutiveHops: number = 0;
         let lastCard: string = "";
         console.log(sortedCards.length);
@@ -13,12 +23,7 @@ export class PokerHand {
             }
             lastCard = sortedCards[i];
         }
-        console.log(consecutiveHops);
-        if (consecutiveHops === 1) {
-            return "Pair";
-        }
-
-        return this.findHighestCard(sortedCards);
+        return consecutiveHops;
     }
 
     private static findHighestCard(sortedCards: string): string {
