@@ -22,4 +22,8 @@ describe("function name", () => {
     it("should determine if hand contains 5 cards with the same suit(flush)", () => {
         expect(PokerHand.findRank("6C 7C 8C 9C TC")).toBe("Flush");
     });
+    it("should determine if hand contains 3 of a kind and pair(full house)", () => {
+        expect(PokerHand.findRank("7H 7C 7S TH TC")).toBe("Full House");
+    });
 });
+

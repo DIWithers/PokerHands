@@ -4,10 +4,11 @@ export class PokerHand {
         let sortedCards: any = cards.split(" ").sort().reverse();
         let cardInfo: any = this.updateOccurances(sortedCards);
         let numOfPairs: number = this.findAllPairs(cardInfo);
-        let isThreeOfAKind: boolean = this.findThreeOfAKind(cardInfo);
-        if (this.isStraight(sortedCards, cardInfo) && this.hasConsecutiveSuits(sortedCards)) return "Flush";
+
+        if (this.isThreeOfAKind(cardInfo) && (numOfPairs === 1)) return "Full House";
+        if (this.isStraight(sortedCards, cardInfo) && this.isSameSuit(sortedCards)) return "Flush";
         if (this.isStraight(sortedCards, cardInfo)) return rank = "Straight";
-        if (isThreeOfAKind) return rank = "Three of a Kind";
+        if (this.isThreeOfAKind(cardInfo)) return rank = "Three of a Kind";
         if (numOfPairs === 2) {
             return rank = "Two Pair";
         }
@@ -65,7 +66,7 @@ export class PokerHand {
         return "High Card: " + highestCardValue;
     }
 
-    private static findThreeOfAKind(cardInfo: any): boolean {
+    private static isThreeOfAKind(cardInfo: any): boolean {
         let isThreeOfAKind: boolean = false;
         for (let key in cardInfo) {
             if (cardInfo[key].Occurance === 3) {
@@ -75,7 +76,7 @@ export class PokerHand {
         return isThreeOfAKind;
     }
 
-    private static hasConsecutiveSuits(sortedCard: string): boolean {
+    private static isSameSuit(sortedCard: string): boolean {
         let lastSuite: number = "";
         let consecutiveSuits: number = 0;
         for (let i: number = 0; i < sortedCard.length; i++) {
