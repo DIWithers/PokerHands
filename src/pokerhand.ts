@@ -7,6 +7,7 @@ export class PokerHand {
         let isThreeOfAKind: boolean = this.findThreeOfAKind(cardInfo);
         console.log(isThreeOfAKind);
         console.log(cardInfo);
+        if (PokerHand.isStraight(sortedCards, cardInfo)) return rank = "Straight";
         if (isThreeOfAKind) return rank = "Three of a Kind";
         if (numOfPairs === 2) {
             return rank = "Two Pair";
@@ -15,6 +16,17 @@ export class PokerHand {
             return rank = "Pair";
         }
         else return rank = this.findHighestCard(sortedCards, cardInfo);
+    }
+
+    private static isStraight(sortedCards: string, cardInfo: any): boolean {
+        let lastValue: number = 0;
+        let consecutiveHops: number = 0;
+        for (let i: number = 0; i < sortedCards.length; i++) {
+            console.log(cardInfo[sortedCards[i][0]].Value + " , " + (lastValue - 1));
+            if (cardInfo[sortedCards[i][0]].Value === (lastValue - 1)) consecutiveHops++;
+            lastValue = cardInfo[sortedCards[i][0]].Value;
+        }
+        return consecutiveHops === 4;
     }
 
     private static findAllPairs(cardInfo: any): number {
@@ -29,19 +41,19 @@ export class PokerHand {
 
     private static updateOccurances(sortedCards: string): any {
             let cardInfo: any = {
-                "2": {Word: "Two", Occurance: 0},
-                "3": {Word: "Three", Occurance: 0},
-                "4": {Word: "Four", Occurance: 0},
-                "5": {Word: "Five", Occurance: 0},
-                "6": {Word: "Six", Occurance: 0},
-                "7": {Word: "Seven", Occurance: 0},
-                "8": {Word: "Eight", Occurance: 0},
-                "9": {Word: "Nine", Occurance: 0},
-                "T": {Word: "Ten", Occurance: 0},
-                "J": {Word: "Jack", Occurance: 0},
-                "Q": {Word: "Queen", Occurance: 0},
-                "K": {Word: "King", Occurance: 0},
-                "A": {Word: "Ace", Occurance: 0},
+                2: {Word: "Two", Occurance: 0, Value: 2},
+                3: {Word: "Three", Occurance: 0, Value: 3},
+                4: {Word: "Four", Occurance: 0, Value: 4},
+                5: {Word: "Five", Occurance: 0, Value: 5},
+                6: {Word: "Six", Occurance: 0, Value: 6},
+                7: {Word: "Seven", Occurance: 0, Value: 7},
+                8: {Word: "Eight", Occurance: 0, Value: 8},
+                9: {Word: "Nine", Occurance: 0, Value: 9},
+                T: {Word: "Ten", Occurance: 0, Value: 10},
+                J: {Word: "Jack", Occurance: 0, Value: 11},
+                Q: {Word: "Queen", Occurance: 0, Value: 12},
+                K: {Word: "King", Occurance: 0, Value: 13},
+                A: {Word: "Ace", Occurance: 0, Value: 14},
 
             };
             for (let i: number = 0; i < sortedCards.length; i++) {
