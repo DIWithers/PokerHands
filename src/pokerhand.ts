@@ -4,6 +4,10 @@ export class PokerHand {
         let sortedCards: any = cards.split(" ").sort().reverse();
         let cardInfo: any = this.updateOccurances(sortedCards);
         let numOfPairs: number = this.findAllPairs(cardInfo);
+        let isThreeOfAKind: boolean = this.findThreeOfAKind(cardInfo);
+        console.log(isThreeOfAKind);
+        console.log(cardInfo);
+        if (isThreeOfAKind) return rank = "Three of a Kind";
         if (numOfPairs === 2) {
             return rank = "Two Pair";
         }
@@ -45,9 +49,19 @@ export class PokerHand {
             }
             return cardInfo;
     }
-    
+
     private static findHighestCard(sortedCards: string, cardInfo: any): string {
         let highestCardValue: string = cardInfo[sortedCards[0][0]].Word;
         return "High Card: " + highestCardValue;
+    }
+
+    private static findThreeOfAKind(cardInfo: any): boolean {
+        let isThreeOfAKind: boolean = false;
+        for (let key in cardInfo) {
+            if (cardInfo[key].Occurance === 3) {
+            isThreeOfAKind = true;
+            }
+        }
+        return isThreeOfAKind;
     }
 }
