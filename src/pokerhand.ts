@@ -18,7 +18,28 @@ export class PokerHand {
         }
         else return this.findHighestCard(sortedCards, cardInfo);
     }
+    private static updateOccurances(sortedCards: string): any {
+        let cardInfo: any = {
+            2: {Word: "Two", Occurance: 0, Value: 2},
+            3: {Word: "Three", Occurance: 0, Value: 3},
+            4: {Word: "Four", Occurance: 0, Value: 4},
+            5: {Word: "Five", Occurance: 0, Value: 5},
+            6: {Word: "Six", Occurance: 0, Value: 6},
+            7: {Word: "Seven", Occurance: 0, Value: 7},
+            8: {Word: "Eight", Occurance: 0, Value: 8},
+            9: {Word: "Nine", Occurance: 0, Value: 9},
+            T: {Word: "Ten", Occurance: 0, Value: 10},
+            J: {Word: "Jack", Occurance: 0, Value: 11},
+            Q: {Word: "Queen", Occurance: 0, Value: 12},
+            K: {Word: "King", Occurance: 0, Value: 13},
+            A: {Word: "Ace", Occurance: 0, Value: 14},
 
+        };
+        for (let i: number = 0; i < sortedCards.length; i++) {
+            cardInfo[sortedCards[i][0]].Occurance += 1;
+        }
+        return cardInfo;
+    }
     private static isStraight(sortedCards: string, cardInfo: any): boolean {
         let lastValue: number = 0;
         let consecutiveHops: number = 0;
@@ -28,55 +49,6 @@ export class PokerHand {
         }
         return consecutiveHops === 4;
     }
-
-    private static findAllPairs(cardInfo: any): number {
-        let numOfPairs: number = 0;
-        for (let key in cardInfo) {
-            if (cardInfo[key].Occurance === 2) {
-                numOfPairs++;
-            }
-        }
-        return numOfPairs;
-    }
-
-    private static updateOccurances(sortedCards: string): any {
-            let cardInfo: any = {
-                2: {Word: "Two", Occurance: 0, Value: 2},
-                3: {Word: "Three", Occurance: 0, Value: 3},
-                4: {Word: "Four", Occurance: 0, Value: 4},
-                5: {Word: "Five", Occurance: 0, Value: 5},
-                6: {Word: "Six", Occurance: 0, Value: 6},
-                7: {Word: "Seven", Occurance: 0, Value: 7},
-                8: {Word: "Eight", Occurance: 0, Value: 8},
-                9: {Word: "Nine", Occurance: 0, Value: 9},
-                T: {Word: "Ten", Occurance: 0, Value: 10},
-                J: {Word: "Jack", Occurance: 0, Value: 11},
-                Q: {Word: "Queen", Occurance: 0, Value: 12},
-                K: {Word: "King", Occurance: 0, Value: 13},
-                A: {Word: "Ace", Occurance: 0, Value: 14},
-
-            };
-            for (let i: number = 0; i < sortedCards.length; i++) {
-                cardInfo[sortedCards[i][0]].Occurance += 1;
-            }
-            return cardInfo;
-    }
-
-    private static findHighestCard(sortedCards: string, cardInfo: any): string {
-        let highestCardValue: string = cardInfo[sortedCards[0][0]].Word;
-        return "High Card: " + highestCardValue;
-    }
-
-    private static isThreeOfAKind(cardInfo: any): boolean {
-        let isThreeOfAKind: boolean = false;
-        for (let key in cardInfo) {
-            if (cardInfo[key].Occurance === 3) {
-            isThreeOfAKind = true;
-            }
-        }
-        return isThreeOfAKind;
-    }
-
     private static isSameSuit(sortedCard: string): boolean {
         let lastSuite: number = "";
         let consecutiveSuits: number = 0;
@@ -88,6 +60,24 @@ export class PokerHand {
         else return false;
     }
 
+    private static findAllPairs(cardInfo: any): number {
+        let numOfPairs: number = 0;
+        for (let key in cardInfo) {
+            if (cardInfo[key].Occurance === 2) {
+                numOfPairs++;
+            }
+        }
+        return numOfPairs;
+    }
+    private static isThreeOfAKind(cardInfo: any): boolean {
+        let isThreeOfAKind: boolean = false;
+        for (let key in cardInfo) {
+            if (cardInfo[key].Occurance === 3) {
+            isThreeOfAKind = true;
+            }
+        }
+        return isThreeOfAKind;
+    }
     private static isFourOfAKind(cardInfo: any): boolean {
         let isFourOfAKind: boolean = false;
         for (let key in cardInfo) {
@@ -96,5 +86,9 @@ export class PokerHand {
             }
         }
         return isFourOfAKind;
+    }
+    private static findHighestCard(sortedCards: string, cardInfo: any): string {
+        let highestCardValue: string = cardInfo[sortedCards[0][0]].Word;
+        return "High Card: " + highestCardValue;
     }
 }
