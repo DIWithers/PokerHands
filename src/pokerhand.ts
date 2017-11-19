@@ -50,7 +50,7 @@ export class PokerHand {
         return consecutiveHops === 4;
     }
     private static isSameSuit(sortedCard: string): boolean {
-        let lastSuite: number = "";
+        let lastSuite: string = "";
         let consecutiveSuits: number = 0;
         for (let i: number = 0; i < sortedCard.length; i++) {
             if (sortedCard[i][1] === lastSuite) consecutiveSuits++;
@@ -69,25 +69,22 @@ export class PokerHand {
         return numOfPairs;
     }
     private static isThreeOfAKind(cardInfo: any): boolean {
-        let isThreeOfAKind: boolean = false;
         for (let key in cardInfo) {
             if (cardInfo[key].Occurance === 3) {
-            isThreeOfAKind = true;
+                return true;
             }
         }
-        return isThreeOfAKind;
+        return false;
     }
     private static isFourOfAKind(cardInfo: any): boolean {
-        let isFourOfAKind: boolean = false;
         for (let key in cardInfo) {
             if (cardInfo[key].Occurance === 4) {
-                isFourOfAKind = true;
+                return true;
             }
         }
-        return isFourOfAKind;
+        return false;
     }
     private static findHighestCard(sortedCards: string, cardInfo: any): string {
-        let highestCardValue: string = cardInfo[sortedCards[0][0]].Word;
-        return "High Card: " + highestCardValue;
+        return "High Card: " + cardInfo[sortedCards[0][0]].Word;
     }
 }
