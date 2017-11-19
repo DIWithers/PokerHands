@@ -5,6 +5,7 @@ export class PokerHand {
         let cardInfo: any = this.updateOccurances(sortedCards);
         let numOfPairs: number = this.findAllPairs(cardInfo);
 
+        if (this.isFourOfAKind(cardInfo)) return "Four of a Kind";
         if (this.isThreeOfAKind(cardInfo) && (numOfPairs === 1)) return "Full House";
         if (this.isStraight(sortedCards, cardInfo) && this.isSameSuit(sortedCards)) return "Flush";
         if (this.isStraight(sortedCards, cardInfo)) return rank = "Straight";
@@ -85,5 +86,15 @@ export class PokerHand {
         }
         if (consecutiveSuits === 4) return true;
         else return false;
+    }
+
+    private static isFourOfAKind(cardInfo: any): boolean {
+        let isFourOfAKind: boolean = false;
+        for (let key in cardInfo) {
+            if (cardInfo[key].Occurance === 4) {
+                isFourOfAKind = true;
+            }
+        }
+        return isFourOfAKind;
     }
 }

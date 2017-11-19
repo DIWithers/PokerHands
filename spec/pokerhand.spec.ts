@@ -25,5 +25,8 @@ describe("function name", () => {
     it("should determine if hand contains 3 of a kind and pair(full house)", () => {
         expect(PokerHand.findRank("7H 7C 7S TH TC")).toBe("Full House");
     });
+    it("should determine if hand contains 4 of a kind", () => {
+        expect(PokerHand.findRank("7H 7C 7S 7D TC")).toBe("Four of a Kind");
+    });
 });
 
