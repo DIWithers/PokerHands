@@ -5,9 +5,8 @@ export class PokerHand {
         let cardInfo: any = this.updateOccurances(sortedCards);
         let numOfPairs: number = this.findAllPairs(cardInfo);
         let isThreeOfAKind: boolean = this.findThreeOfAKind(cardInfo);
-        console.log(isThreeOfAKind);
-        console.log(cardInfo);
-        if (PokerHand.isStraight(sortedCards, cardInfo)) return rank = "Straight";
+        if (this.isStraight(sortedCards, cardInfo) && this.hasConsecutiveSuits(sortedCards)) return "Flush";
+        if (this.isStraight(sortedCards, cardInfo)) return rank = "Straight";
         if (isThreeOfAKind) return rank = "Three of a Kind";
         if (numOfPairs === 2) {
             return rank = "Two Pair";
@@ -22,7 +21,6 @@ export class PokerHand {
         let lastValue: number = 0;
         let consecutiveHops: number = 0;
         for (let i: number = 0; i < sortedCards.length; i++) {
-            console.log(cardInfo[sortedCards[i][0]].Value + " , " + (lastValue - 1));
             if (cardInfo[sortedCards[i][0]].Value === (lastValue - 1)) consecutiveHops++;
             lastValue = cardInfo[sortedCards[i][0]].Value;
         }
@@ -75,5 +73,16 @@ export class PokerHand {
             }
         }
         return isThreeOfAKind;
+    }
+
+    private static hasConsecutiveSuits(sortedCard: string): boolean {
+        let lastSuite: number = "";
+        let consecutiveSuits: number = 0;
+        for (let i: number = 0; i < sortedCard.length; i++) {
+            if (sortedCard[i][1] === lastSuite) consecutiveSuits++;
+            lastSuite = sortedCard[i][1];
+        }
+        if (consecutiveSuits === 4) return true;
+        else return false;
     }
 }
