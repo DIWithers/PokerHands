@@ -3,23 +3,23 @@ export class PokerHand {
         let rank: string;
         let sortedCards: any = cards.split(" ").sort().reverse();
         let cardInfo: any = this.updateOccurances(sortedCards);
-        // console.log(cardInfo);
         let numOfPairs: number = this.findAllPairs(cardInfo);
-        if (numOfPairs === 1) {
-            rank = "Pair";
+        if (numOfPairs === 2) {
+            return rank = "Two Pair";
         }
-        else rank = this.findHighestCard(sortedCards, cardInfo);
-        return rank;
+        if (numOfPairs === 1) {
+            return rank = "Pair";
+        }
+        else return rank = this.findHighestCard(sortedCards, cardInfo);
     }
 
     private static findAllPairs(cardInfo: any): number {
         let numOfPairs: number = 0;
         for (let key in cardInfo) {
-            if (cardInfo[key].Occurance === 2){
+            if (cardInfo[key].Occurance === 2) {
                 numOfPairs++;
             }
         }
-        console.log("pairs: " + numOfPairs);
         return numOfPairs;
     }
 
@@ -42,18 +42,12 @@ export class PokerHand {
             };
             for (let i: number = 0; i < sortedCards.length; i++) {
                 cardInfo[sortedCards[i][0]].Occurance += 1;
-                // console.log(cardInfo[sortedCards[i][0]].Occurance);
-
             }
             return cardInfo;
     }
-
+    
     private static findHighestCard(sortedCards: string, cardInfo: any): string {
         let highestCardValue: string = cardInfo[sortedCards[0][0]].Word;
-        // console.log(highestCardValue + "!!!");
         return "High Card: " + highestCardValue;
     }
 }
-
-
-///OCCURANCE!!! FOR EXAMPLE, "A": {"WORD": "ACE", "OCCURANCE": 1}
