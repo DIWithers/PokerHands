@@ -1,6 +1,5 @@
 export class PokerHand {
     static findRank(cards: string): string {
-        let rank: string;
         let sortedCards: any = cards.split(" ").sort().reverse();
         let cardInfo: any = this.updateOccurances(sortedCards);
         let numOfPairs: number = this.findAllPairs(cardInfo);
@@ -9,15 +8,15 @@ export class PokerHand {
         if (this.isFourOfAKind(cardInfo)) return "Four of a Kind";
         if (this.isThreeOfAKind(cardInfo) && (numOfPairs === 1)) return "Full House";
         if (this.isSameSuit(sortedCards)) return "Flush";
-        if (this.isStraight(sortedCards, cardInfo)) return rank = "Straight";
-        if (this.isThreeOfAKind(cardInfo)) return rank = "Three of a Kind";
+        if (this.isStraight(sortedCards, cardInfo)) return "Straight";
+        if (this.isThreeOfAKind(cardInfo)) return "Three of a Kind";
         if (numOfPairs === 2) {
-            return rank = "Two Pair";
+            return "Two Pair";
         }
         if (numOfPairs === 1) {
-            return rank = "Pair";
+            return "Pair";
         }
-        else return rank = this.findHighestCard(sortedCards, cardInfo);
+        else return this.findHighestCard(sortedCards, cardInfo);
     }
 
     private static isStraight(sortedCards: string, cardInfo: any): boolean {
