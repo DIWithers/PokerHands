@@ -5,7 +5,7 @@ export class PokerHand {
         let cardInfo: any = this.updateOccurances(sortedCards);
         let numOfPairs: number = this.findAllPairs(cardInfo);
 
-        // if (this.isStraight(cardInfo) && this.isSameSuit())
+        if (this.isStraight(sortedCards, cardInfo) && this.isSameSuit(sortedCards)) return "Straight Flush";
         if (this.isFourOfAKind(cardInfo)) return "Four of a Kind";
         if (this.isThreeOfAKind(cardInfo) && (numOfPairs === 1)) return "Full House";
         if (this.isSameSuit(sortedCards)) return "Flush";

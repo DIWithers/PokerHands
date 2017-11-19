@@ -20,13 +20,16 @@ describe("function name", () => {
         expect(PokerHand.findRank("6C 7H 8S 9C TH")).toBe("Straight");
     });
     it("should determine if hand contains 5 cards with the same suit(flush)", () => {
-        expect(PokerHand.findRank("6C 7C 8C 9C TC")).toBe("Flush");
+        expect(PokerHand.findRank("6C 7C 7C 9C TC")).toBe("Flush");
     });
     it("should determine if hand contains 3 of a kind and pair(full house)", () => {
         expect(PokerHand.findRank("7H 7C 7S TH TC")).toBe("Full House");
     });
     it("should determine if hand contains 4 of a kind", () => {
         expect(PokerHand.findRank("7H 7C 7S 7D TC")).toBe("Four of a Kind");
+    });
+    it("should determine if hand contains 5 consecutive values and same suit(straight flush)", () => {
+        expect(PokerHand.findRank("2H 3H 4H 5H 6H")).toBe("Straight Flush");
     });
 });
 
