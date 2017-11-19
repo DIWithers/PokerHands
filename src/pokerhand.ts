@@ -56,8 +56,7 @@ export class PokerHand {
             if (sortedCard[i][1] === lastSuite) consecutiveSuits++;
             lastSuite = sortedCard[i][1];
         }
-        if (consecutiveSuits === 4) return true;
-        else return false;
+        return consecutiveSuits === 4;
     }
 
     private static findAllPairs(cardInfo: any): number {
