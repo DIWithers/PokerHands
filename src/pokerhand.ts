@@ -1,8 +1,10 @@
+import any = jasmine.any;
 export class PokerHand {
 
     static findRank(hand: string): string {
         let sortedCards: any = this.sortCards(hand);
         let cardInfo: any = this.updateOccurances(sortedCards);
+        if (this.findXOfAKind(cardInfo, 3)) return "Three of a kind";
         if (this.findXPairs(cardInfo, 2)) return "Two Pair";
         if (this.findXPairs(cardInfo, 1)) return "Pair";
         return this.findHighestCardValue(sortedCards, cardInfo);
@@ -57,14 +59,9 @@ export class PokerHand {
     //     }
     //     return consecutiveSuits === 4;
     // }
-    // private static findXOfAKind(cardInfo: any, x: number): boolean { //has instead, any or some
-    //     for (let key of Array.from(cardInfo.keys())) {
-    //         if (cardInfo.get(key).Occurance === x) {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
+    private static findXOfAKind(cardInfo: any, x: number): boolean {
+        return Array.from(cardInfo.values()).some((card: any) => card.Occurance === x);
+    }
     private static findHighestCardValue(sortedCards: any, cardHandInfo: any): string {
         let highCard: string = cardHandInfo.get(sortedCards[0][0]);
         // let highCard: any = cardHandInfo.get(sortedCards.entries().next().value[0]).Word;
