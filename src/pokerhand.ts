@@ -3,6 +3,7 @@ export class PokerHand {
     static findRank(hand: string): string {
         let sortedCards: any = this.sortCards(hand);
         let cardInfo: any = this.updateOccurances(sortedCards);
+        if (this.findXPairs(cardInfo, 2)) return "Two Pair";
         if (this.findXPairs(cardInfo, 1)) return "Pair";
         return this.findHighestCardValue(sortedCards, cardInfo);
     }
