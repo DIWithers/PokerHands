@@ -3,7 +3,7 @@ export class PokerHand {
     static findRank(hand: string): string {
         let sortedCards: any = this.sortCards(hand);
         let cardInfo: any = this.updateOccurances(sortedCards);
-        // if (this.findXPairs(cardInfo, 1)) return "Pair";
+        if (this.findXPairs(cardInfo, 1)) return "Pair";
         return this.findHighestCardValue(sortedCards, cardInfo);
     }
     private static sortCards(hand: string): any {
@@ -29,18 +29,15 @@ export class PokerHand {
         for (let card of Array.from(sortedCards)) cardInfo.get(card[0]).Occurance += 1;
         return cardInfo;
     }
-    // private static findXPairs(cardInfo: any, pairsToFind: number): number {
-    //     let numOfPairs: number = 0;
-    //     // console.log(cardInfo);
-    //     for (let cardValue of Array.from(cardInfo.keys())) {
-    //         if (cardInfo.get(cardValue).Occurance === 2) {
-    //             // console.log("! " + cardInfo.get(cardValue).Occurance);
-    //             numOfPairs++;
-    //         }
-    //     }
-    //     // console.log(numOfPairs);
-    //     return numOfPairs === pairsToFind;
-    // }
+    private static findXPairs(cardInfo: any, pairsToFind: number): number {
+        let numOfPairs: number = 0;
+        for (let cardValue of Array.from(cardInfo.keys())) {
+            if (cardInfo.get(cardValue).Occurance === 2) {
+                numOfPairs++;
+            }
+        }
+        return numOfPairs === pairsToFind;
+    }
     // private static isStraight(sortedCards: string, cardInfo: any): boolean {
     //     let lastValue: number = 0;
     //     let consecutiveHops: number = 0;
