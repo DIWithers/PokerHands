@@ -5,7 +5,7 @@ describe("Poker Hands", () => {
      expect(PokerHand.findRank("2C 3H 4S 8C AH")).toBe("High Card: Ace");
     });
     it("should return highest card value if Eight", () => {
-        expect(PokerHand.findRank("2C 3H 4S 8C 4H")).toBe("High Card: Eight");
+        expect(PokerHand.findRank("7C 3H 2S 8C 4H")).toBe("High Card: Eight");
     });
 });
 
