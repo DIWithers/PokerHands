@@ -3,7 +3,7 @@ export class PokerHand {
 
     static findRank(hand: string): string {
         let sortedCards: any = this.sortCards(hand);
-        let cardInfo: any = this.updateOccurances(sortedCards);
+        let cardInfo: any = this.updateCardInfo(sortedCards);
         if (this.findXOfAKind(cardInfo, 3)) return "Three of a kind";
         if (this.findXPairs(cardInfo, 2)) return "Two Pair";
         if (this.findXPairs(cardInfo, 1)) return "Pair";
@@ -13,7 +13,7 @@ export class PokerHand {
         let sortedCards: any = hand.split(" ").sort().reverse();
         return sortedCards;
     }
-    private static updateOccurances(sortedCards: string): any {
+    private static updateCardInfo(sortedCards: string): any {
         let cardInfo: any = new Map<string, any>();
         cardInfo.set("2", {Word: "Two", Occurance: 0, Rank: 2});
         cardInfo.set("3", {Word: "Three", Occurance: 0, Rank: 3});
