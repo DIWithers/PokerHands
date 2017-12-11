@@ -4,6 +4,7 @@ export class PokerHand {
     static findRank(hand: string): string {
         let sortedCards: any = this.sortCards(hand);
         let cardInfo: any = this.updateCardInfo(sortedCards);
+        if (this.findXOfAKind(cardInfo, 3) && this.findXPairs(cardInfo, 1)) return "Full House";
         if (this.isSameSuit(sortedCards)) return "Flush";
         if (this.isStraight(sortedCards, cardInfo)) return "Straight";
         if (this.findXOfAKind(cardInfo, 3)) return "Three of a kind";
