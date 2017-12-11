@@ -19,5 +19,8 @@ describe("Poker Hands", () => {
     it("should return straight if hand contains 5 cards with consecutive values", () => {
         expect(PokerHand.findRank("2C 3H 4S 5C 6H")).toBe("Straight");
     });
+    it("should return flush if hand contains 5 cards with same suit", () => {
+        expect(PokerHand.findRank("2H AH 4H 5H 6H")).toBe("Flush");
+    });
 });
 
