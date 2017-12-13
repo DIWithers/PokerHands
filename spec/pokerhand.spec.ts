@@ -25,5 +25,8 @@ describe("Poker Hands", () => {
     it("should return full house with 3 cards of the same value, with the remaining 2 cards forming a pair", () => {
         expect(PokerHand.findRank("2H 2S 2C 5D 5H")).toBe("Full House");
     });
+    it("should return four of a kind with 4 cards of the same value", () => {
+        expect(PokerHand.findRank("2H 2S 2C 2D 5H")).toBe("Four of a kind");
+    });
 });
 
