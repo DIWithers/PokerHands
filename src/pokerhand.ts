@@ -14,8 +14,13 @@ export class PokerHand {
         return this.findHighestCardValue(sortedCards, cardInfo);
     }
     private static sortCards(hand: string): any {
-        let sortedCards: any = hand.split(" ").sort().reverse();
-        return sortedCards;
+        let sortedCards: any;
+        sortedCards = hand.split(" ").sort().reverse();
+        console.log(sortedCards);
+        sortedCards = hand.split(" ").sort((a: any, b: any) => {
+            if ((a[0] !== "A")) a[0].localeCompare(b[0]);
+        });
+        return sortedCards.reverse();
     }
     private static updateCardInfo(sortedCards: string): any {
         let cardInfo: any = new Map<string, any>();
