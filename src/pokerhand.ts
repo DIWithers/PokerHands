@@ -6,7 +6,7 @@ export class PokerHand {
         let sortedCards: any = this.sortCards(hand, cardReference);
         cardReference = this.updateCardInfo(sortedCards, cardReference);
         // if (this.findXOfAKind(cardReference, 4)) return "Four of a kind";
-        // if (this.findXOfAKind(cardReference, 3) && this.findXPairs(cardReference, 1)) return "Full House";
+        if (this.findXOfAKind(cardReference, 3) && this.findXPairs(cardReference, 1)) return "Full House";
         if (this.isSameSuit(sortedCards)) return "Flush";
         if (this.isStraight(sortedCards, cardReference)) return "Straight";
         if (this.findXOfAKind(cardReference, 3)) return "Three of a kind";
