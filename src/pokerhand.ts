@@ -11,7 +11,7 @@ export class PokerHand {
         // if (this.isStraight(sortedCards, cardReference)) return "Straight";
         // if (this.findXOfAKind(cardReference, 3)) return "Three of a kind";
         // if (this.findXPairs(cardReference, 2)) return "Two Pair";
-        // if (this.findXPairs(cardReference, 1)) return "Pair";
+        if (this.findXPairs(cardReference, 1)) return "Pair";
         return this.findHighestCardValue(sortedCards, cardReference);
     }
     private static initializeCardInfo(): any {
@@ -53,15 +53,15 @@ export class PokerHand {
         return cardInfo;
     }
 
-    // private static findXPairs(cardInfo: any, pairsToFind: number): number {
-    //     let numOfPairs: number = 0;
-    //     for (let cardValue of Array.from(cardInfo.keys())) {
-    //         if (cardInfo.get(cardValue).Occurance === 2) {
-    //             numOfPairs++;
-    //         }
-    //     }
-    //     return numOfPairs === pairsToFind;
-    // }
+    private static findXPairs(cardInfo: any, pairsToFind: number): number {
+        let numOfPairs: number = 0;
+        for (let cardValue of Array.from(cardInfo.keys())) {
+            if (cardInfo.get(cardValue).Occurance === 2) {
+                numOfPairs++;
+            }
+        }
+        return numOfPairs === pairsToFind;
+    }
     // private static isStraight(sortedCards: string, cardInfo: any): boolean {
     //     let lastValue: number = 0;
     //     let consecutiveHops: number = 0;
@@ -90,4 +90,4 @@ export class PokerHand {
     }
 }
 
-//occurance may need to be moved to sorted cards
+//occurance may need to be moved to sorted cards, ask Mike?
