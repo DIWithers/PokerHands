@@ -33,13 +33,17 @@ export class PokerHand {
         return cardInfo;
     }
     private static sortCards(hand: string, cardInfo: any): any {
-        let splitHand: any = hand.split(" ");
         let sortedCards: any = [];
+        this.splitHand(hand, sortedCards, cardInfo);
+        sortedCards.sort((a: any, b: any) => b.rank - a.rank);
+        return sortedCards;
+    }
+
+    private static splitHand(hand: string, sortedCards: any, cardInfo: any): any {
+        let splitHand: any = hand.split(" ");
         splitHand.forEach((card: string) => {
             sortedCards.push({value: card[0], suit: card[1], rank: cardInfo.get(card[0]).Rank});
-        }
-        sortedCards.sort((a: any, b: any) => a.rank - b.rank);
-        return sortedCards.reverse();
+        });
     }
 
     private static updateCardInfo(sortedCards: any, cardInfo: any): any {
