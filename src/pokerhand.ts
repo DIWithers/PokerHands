@@ -5,28 +5,14 @@ export class PokerHand {
         let cardReference: any = this.initializeCardInfo();
         let sortedCards: any = this.sortCards(hand, cardReference);
         cardReference = this.updateCardInfo(sortedCards, cardReference);
-        if (this.findXOfAKind(cardReference, 4)) return "Four of a kind";
-        if (this.findXOfAKind(cardReference, 3) && this.findXPairs(cardReference, 1)) return "Full House";
-        if (this.isSameSuit(sortedCards)) return "Flush";
-        if (this.isStraight(sortedCards, cardReference)) return "Straight";
-        if (this.findXOfAKind(cardReference, 3)) return "Three of a kind";
-        if (this.findXPairs(cardReference, 2)) return "Two Pair";
-        if (this.findXPairs(cardReference, 1)) return "Pair";
+        // if (this.findXOfAKind(cardReference, 4)) return "Four of a kind";
+        // if (this.findXOfAKind(cardReference, 3) && this.findXPairs(cardReference, 1)) return "Full House";
+        // if (this.isSameSuit(sortedCards)) return "Flush";
+        // if (this.isStraight(sortedCards, cardReference)) return "Straight";
+        // if (this.findXOfAKind(cardReference, 3)) return "Three of a kind";
+        // if (this.findXPairs(cardReference, 2)) return "Two Pair";
+        // if (this.findXPairs(cardReference, 1)) return "Pair";
         return this.findHighestCardValue(sortedCards, cardReference);
-        return "";
-    }
-    private static sortCards(hand: string, cardInfo: any): any {
-        let splitHand: any = hand.split(" ");
-        let sortedCards: any = [];
-        splitHand.forEach((card: string) => {
-            console.log(card);
-            sortedCards.push([card, cardInfo.get(card[0]).Rank]);
-            console.log("pushed");
-        }
-        console.log(sortedCards);
-        sortedCards.sort((a: any, b: any) => a[1] - b[1]);
-        console.log(sortedCards.reverse());
-        return sortedCards.reverse();
     }
     private static initializeCardInfo(): any {
         let cardInfo: any = new Map<string, any>();
@@ -46,44 +32,58 @@ export class PokerHand {
 
         return cardInfo;
     }
-    private static findXPairs(cardInfo: any, pairsToFind: number): number {
-        let numOfPairs: number = 0;
-        for (let cardValue of Array.from(cardInfo.keys())) {
-            if (cardInfo.get(cardValue).Occurance === 2) {
-                numOfPairs++;
-            }
+    private static sortCards(hand: string, cardInfo: any): any {
+        let splitHand: any = hand.split(" ");
+        let sortedCards: any = [];
+        splitHand.forEach((card: string) => {
+            sortedCards.push({value: card[0], suit: card[1], rank: cardInfo.get(card[0]).Rank});
         }
-        return numOfPairs === pairsToFind;
-    }
-    private static isStraight(sortedCards: string, cardInfo: any): boolean {
-        let lastValue: number = 0;
-        let consecutiveHops: number = 0;
-        sortedCards.forEach((card: string) => {
-            if (cardInfo.get(card[0]).Rank === (lastValue - 1)) consecutiveHops++;
-            lastValue = cardInfo.get(card[0]).Rank;
-        });
-        return consecutiveHops === 4;
-    }
-    private static isSameSuit(sortedCards: string): boolean {
-        let lastSuite: string = "";
-        let consecutiveSuits: number = 0;
-        sortedCards.forEach((card: string) => {
-        if (card[1] === lastSuite) consecutiveSuits++;
-            lastSuite = card[1];
-        });
-        return consecutiveSuits === 4;
-    }
-    private static findXOfAKind(cardInfo: any, x: number): boolean {
-        return Array.from(cardInfo.values()).some((card: any) => card.Occurance === x);
-    }
-    private static findHighestCardValue(sortedCards: any, cardHandInfo: any): string {
-        let highCard: string = cardHandInfo.get(sortedCards[0][0]);
-        // let highCard: any = cardHandInfo.get(sortedCards.entries().next().value[0]).Word;
-        return "High Card: " + highCard.Word;
+        sortedCards.sort((a: any, b: any) => a.rank - b.rank);
+        return sortedCards.reverse();
     }
 
     private static updateCardInfo(sortedCards: any, cardInfo: any): any {
-        for (let card of Array.from(sortedCards)) cardInfo.get(card[0]).Occurance += 1;
+        for (let card of Array.from(sortedCards)) {
+            cardInfo.get(card.value).Occurance += 1;
+        }
         return cardInfo;
     }
+
+    // private static findXPairs(cardInfo: any, pairsToFind: number): number {
+    //     let numOfPairs: number = 0;
+    //     for (let cardValue of Array.from(cardInfo.keys())) {
+    //         if (cardInfo.get(cardValue).Occurance === 2) {
+    //             numOfPairs++;
+    //         }
+    //     }
+    //     return numOfPairs === pairsToFind;
+    // }
+    // private static isStraight(sortedCards: string, cardInfo: any): boolean {
+    //     let lastValue: number = 0;
+    //     let consecutiveHops: number = 0;
+    //     sortedCards.forEach((card: string) => {
+    //         if (cardInfo.get(card[0]).Rank === (lastValue - 1)) consecutiveHops++;
+    //         lastValue = cardInfo.get(card[0]).Rank;
+    //     });
+    //     return consecutiveHops === 4;
+    // }
+    // private static isSameSuit(sortedCards: string): boolean {
+    //     let lastSuite: string = "";
+    //     let consecutiveSuits: number = 0;
+    //     sortedCards.forEach((card: string) => {
+    //     if (card[1] === lastSuite) consecutiveSuits++;
+    //         lastSuite = card[1];
+    //     });
+    //     return consecutiveSuits === 4;
+    // }
+    // private static findXOfAKind(cardInfo: any, x: number): boolean {
+    //     return Array.from(cardInfo.values()).some((card: any) => card.Occurance === x);
+    // }
+    private static findHighestCardValue(sortedCards: any, cardHandInfo: any): string {
+        let highCard: string = cardHandInfo.get(sortedCards[0].value);
+        // let highCard: any = cardHandInfo.get(sortedCards.entries().next().value[0]).Word;
+        return "High Card: " + highCard.Word;
+    }
 }
+
+//occurance may need to be moved to sorted cards
