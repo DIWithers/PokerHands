@@ -2,7 +2,7 @@ import {PokerHand} from "../src/pokerhand";
 
 describe("Poker Hands", () => {
     it("should return highest card value if Ace", () => {
-     expect(PokerHand.findRank("2C AH 5S 8C JH")).toBe("High Card: Ace");
+     expect(PokerHand.findRank("2C 9H 5S 7C AH")).toBe("High Card: Ace");
     });
     it("should return highest card value if Eight", () => {
         expect(PokerHand.findRank("7C 3H 2S 8C 4H")).toBe("High Card: Eight");

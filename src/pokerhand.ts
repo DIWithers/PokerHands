@@ -2,25 +2,30 @@ import any = jasmine.any;
 export class PokerHand {
 
     static findRank(hand: string): string {
-        let cardInfo: any = this.initializeCardInfo();
-        let sortedCards: any = this.sortCards(hand);
-        cardInfo = this.updateCardInfo(sortedCards, cardInfo);
-        if (this.findXOfAKind(cardInfo, 4)) return "Four of a kind";
-        if (this.findXOfAKind(cardInfo, 3) && this.findXPairs(cardInfo, 1)) return "Full House";
+        let cardReference: any = this.initializeCardInfo();
+        let sortedCards: any = this.sortCards(hand, cardReference);
+        cardReference = this.updateCardInfo(sortedCards, cardReference);
+        if (this.findXOfAKind(cardReference, 4)) return "Four of a kind";
+        if (this.findXOfAKind(cardReference, 3) && this.findXPairs(cardReference, 1)) return "Full House";
         if (this.isSameSuit(sortedCards)) return "Flush";
-        if (this.isStraight(sortedCards, cardInfo)) return "Straight";
-        if (this.findXOfAKind(cardInfo, 3)) return "Three of a kind";
-        if (this.findXPairs(cardInfo, 2)) return "Two Pair";
-        if (this.findXPairs(cardInfo, 1)) return "Pair";
-        return this.findHighestCardValue(sortedCards, cardInfo);
+        if (this.isStraight(sortedCards, cardReference)) return "Straight";
+        if (this.findXOfAKind(cardReference, 3)) return "Three of a kind";
+        if (this.findXPairs(cardReference, 2)) return "Two Pair";
+        if (this.findXPairs(cardReference, 1)) return "Pair";
+        return this.findHighestCardValue(sortedCards, cardReference);
+        return "";
     }
-    private static sortCards(hand: string): any {
-        let sortedCards: any;
-        sortedCards = hand.split(" ").sort().reverse();
+    private static sortCards(hand: string, cardInfo: any): any {
+        let splitHand: any = hand.split(" ");
+        let sortedCards: any = [];
+        splitHand.forEach((card: string) => {
+            console.log(card);
+            sortedCards.push([card, cardInfo.get(card[0]).Rank]);
+            console.log("pushed");
+        }
         console.log(sortedCards);
-        sortedCards = hand.split(" ").sort((a: any, b: any) => {
-            if ((a[0] !== "A")) a[0].localeCompare(b[0]);
-        });
+        sortedCards.sort((a: any, b: any) => a[1] - b[1]);
+        console.log(sortedCards.reverse());
         return sortedCards.reverse();
     }
     private static initializeCardInfo(): any {
