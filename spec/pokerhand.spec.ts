@@ -13,9 +13,9 @@ describe("Poker Hands", () => {
     it("should return two pairs if two sets of cards have the same value", () => {
         expect(PokerHand.findRank("2C 4H 4S 8C 8H")).toBe("Two Pair");
     });
-    // it("should return three of a kind if 3 cards have the same value", () => {
-    //     expect(PokerHand.findRank("2C 4H 4S 4C 8H")).toBe("Three of a kind");
-    // });
+    it("should return three of a kind if 3 cards have the same value", () => {
+        expect(PokerHand.findRank("2C 4H 4S 4C 8H")).toBe("Three of a kind");
+    });
     // it("should return straight if hand contains 5 cards with consecutive values", () => {
     //     expect(PokerHand.findRank("2C 3H 4S 5C 6H")).toBe("Straight");
     // });

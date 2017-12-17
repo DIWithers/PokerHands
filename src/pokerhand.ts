@@ -9,7 +9,7 @@ export class PokerHand {
         // if (this.findXOfAKind(cardReference, 3) && this.findXPairs(cardReference, 1)) return "Full House";
         // if (this.isSameSuit(sortedCards)) return "Flush";
         // if (this.isStraight(sortedCards, cardReference)) return "Straight";
-        // if (this.findXOfAKind(cardReference, 3)) return "Three of a kind";
+        if (this.findXOfAKind(cardReference, 3)) return "Three of a kind";
         if (this.findXPairs(cardReference, 2)) return "Two Pair";
         if (this.findXPairs(cardReference, 1)) return "Pair";
         return this.findHighestCardValue(sortedCards, cardReference);
@@ -62,6 +62,9 @@ export class PokerHand {
         }
         return numOfPairs === pairsToFind;
     }
+    private static findXOfAKind(cardInfo: any, x: number): boolean {
+        return Array.from(cardInfo.values()).some((card: any) => card.Occurance === x);
+    }
     // private static isStraight(sortedCards: string, cardInfo: any): boolean {
     //     let lastValue: number = 0;
     //     let consecutiveHops: number = 0;
@@ -80,9 +83,7 @@ export class PokerHand {
     //     });
     //     return consecutiveSuits === 4;
     // }
-    // private static findXOfAKind(cardInfo: any, x: number): boolean {
-    //     return Array.from(cardInfo.values()).some((card: any) => card.Occurance === x);
-    // }
+
     private static findHighestCardValue(sortedCards: any, cardHandInfo: any): string {
         let highCard: string = cardHandInfo.get(sortedCards[0].value);
         // let highCard: any = cardHandInfo.get(sortedCards.entries().next().value[0]).Word;
