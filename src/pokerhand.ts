@@ -1,4 +1,3 @@
-import any = jasmine.any;
 export class PokerHand {
 
     static findRank(hand: string): string {
@@ -15,22 +14,22 @@ export class PokerHand {
         return this.findHighestCardValue(sortedCards, cardReference);
     }
     private static initializeCardReference(): any {
-        let cardInfo: any = new Map<string, any>();
-        cardInfo.set("2", {Word: "Two", Occurance: 0, Rank: 2});
-        cardInfo.set("3", {Word: "Three", Occurance: 0, Rank: 3});
-        cardInfo.set("4", {Word: "Four", Occurance: 0, Rank: 4});
-        cardInfo.set("5", {Word: "Five", Occurance: 0, Rank: 5});
-        cardInfo.set("6", {Word: "Six", Occurance: 0, Rank: 6});
-        cardInfo.set("7", {Word: "Seven", Occurance: 0, Rank: 7});
-        cardInfo.set("8", {Word: "Eight", Occurance: 0, Rank: 8});
-        cardInfo.set("9", {Word: "Nine", Occurance: 0, Rank: 9});
-        cardInfo.set("T", {Word: "Ten", Occurance: 0, Rank: 10});
-        cardInfo.set("J", {Word: "Jack", Occurance: 0, Rank: 11});
-        cardInfo.set("Q", {Word: "Queen", Occurance: 0, Rank: 12});
-        cardInfo.set("K", {Word: "King", Occurance: 0, Rank: 13});
-        cardInfo.set("A", {Word: "Ace", Occurance: 0, Rank: 14});
+        let cardReference: any = new Map<string, any>();
+        cardReference.set("2", {Word: "Two", Occurance: 0, Rank: 2});
+        cardReference.set("3", {Word: "Three", Occurance: 0, Rank: 3});
+        cardReference.set("4", {Word: "Four", Occurance: 0, Rank: 4});
+        cardReference.set("5", {Word: "Five", Occurance: 0, Rank: 5});
+        cardReference.set("6", {Word: "Six", Occurance: 0, Rank: 6});
+        cardReference.set("7", {Word: "Seven", Occurance: 0, Rank: 7});
+        cardReference.set("8", {Word: "Eight", Occurance: 0, Rank: 8});
+        cardReference.set("9", {Word: "Nine", Occurance: 0, Rank: 9});
+        cardReference.set("T", {Word: "Ten", Occurance: 0, Rank: 10});
+        cardReference.set("J", {Word: "Jack", Occurance: 0, Rank: 11});
+        cardReference.set("Q", {Word: "Queen", Occurance: 0, Rank: 12});
+        cardReference.set("K", {Word: "King", Occurance: 0, Rank: 13});
+        cardReference.set("A", {Word: "Ace", Occurance: 0, Rank: 14});
 
-        return cardInfo;
+        return cardReference;
     }
     private static sortCards(hand: string, cardReference: any): any {
         let sortedCards: any = [];
@@ -53,24 +52,24 @@ export class PokerHand {
         return cardReference;
     }
 
-    private static isXPairs(cardInfo: any, pairsToFind: number): number {
+    private static isXPairs(cardReference: any, pairsToFind: number): number {
         let numOfPairs: number = 0;
-        for (let cardValue of Array.from(cardInfo.keys())) {
-            if (cardInfo.get(cardValue).Occurance === 2) {
+        for (let cardValue of Array.from(cardReference.keys())) {
+            if (cardReference.get(cardValue).Occurance === 2) {
                 numOfPairs++;
             }
         }
         return numOfPairs === pairsToFind;
     }
-    private static isXOfAKind(cardInfo: any, x: number): boolean {
-        return Array.from(cardInfo.values()).some((card: any) => card.Occurance === x);
+    private static isXOfAKind(cardReference: any, x: number): boolean {
+        return Array.from(cardReference.values()).some((card: any) => card.Occurance === x);
     }
-    private static isStraight(sortedCards: string, cardInfo: any): boolean {
+    private static isStraight(sortedCards: string, cardReference: any): boolean {
         let lastValue: number = 0;
         let consecutiveHops: number = 0;
         sortedCards.forEach((card: string) => {
-            if (cardInfo.get(card.value).Rank === (lastValue - 1)) consecutiveHops++;
-            lastValue = cardInfo.get(card.value).Rank;
+            if (cardReference.get(card.value).Rank === (lastValue - 1)) consecutiveHops++;
+            lastValue = cardReference.get(card.value).Rank;
         });
         return consecutiveHops === 4;
     }
@@ -84,9 +83,9 @@ export class PokerHand {
         return consecutiveSuits === 4;
     }
 
-    private static findHighestCardValue(sortedCards: any, cardHandInfo: any): string {
-        let highCard: string = cardHandInfo.get(sortedCards[0].value);
-        // let highCard: any = cardHandInfo.get(sortedCards.entries().next().value[0]).Word;
+    private static findHighestCardValue(sortedCards: any, cardReference: any): string {
+        let highCard: string = cardReference.get(sortedCards[0].value);
+        // let highCard: any = cardReference.get(sortedCards.entries().next().value[0]).Word;
         return "High Card: " + highCard.Word;
     }
 }
