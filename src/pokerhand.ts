@@ -2,8 +2,9 @@ import any = jasmine.any;
 export class PokerHand {
 
     static findRank(hand: string): string {
+        let cardInfo: any = this.initializeCardInfo();
         let sortedCards: any = this.sortCards(hand);
-        let cardInfo: any = this.updateCardInfo(sortedCards);
+        cardInfo = this.updateCardInfo(sortedCards, cardInfo);
         if (this.findXOfAKind(cardInfo, 4)) return "Four of a kind";
         if (this.findXOfAKind(cardInfo, 3) && this.findXPairs(cardInfo, 1)) return "Full House";
         if (this.isSameSuit(sortedCards)) return "Flush";
@@ -22,7 +23,7 @@ export class PokerHand {
         });
         return sortedCards.reverse();
     }
-    private static updateCardInfo(sortedCards: string): any {
+    private static initializeCardInfo(): any {
         let cardInfo: any = new Map<string, any>();
         cardInfo.set("2", {Word: "Two", Occurance: 0, Rank: 2});
         cardInfo.set("3", {Word: "Three", Occurance: 0, Rank: 3});
@@ -38,7 +39,6 @@ export class PokerHand {
         cardInfo.set("K", {Word: "King", Occurance: 0, Rank: 13});
         cardInfo.set("A", {Word: "Ace", Occurance: 0, Rank: 14});
 
-        for (let card of Array.from(sortedCards)) cardInfo.get(card[0]).Occurance += 1;
         return cardInfo;
     }
     private static findXPairs(cardInfo: any, pairsToFind: number): number {
@@ -75,5 +75,10 @@ export class PokerHand {
         let highCard: string = cardHandInfo.get(sortedCards[0][0]);
         // let highCard: any = cardHandInfo.get(sortedCards.entries().next().value[0]).Word;
         return "High Card: " + highCard.Word;
+    }
+
+    private static updateCardInfo(sortedCards: any, cardInfo: any): any {
+        for (let card of Array.from(sortedCards)) cardInfo.get(card[0]).Occurance += 1;
+        return cardInfo;
     }
 }
