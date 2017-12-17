@@ -7,7 +7,7 @@ export class PokerHand {
         cardReference = this.updateCardInfo(sortedCards, cardReference);
         // if (this.findXOfAKind(cardReference, 4)) return "Four of a kind";
         // if (this.findXOfAKind(cardReference, 3) && this.findXPairs(cardReference, 1)) return "Full House";
-        // if (this.isSameSuit(sortedCards)) return "Flush";
+        if (this.isSameSuit(sortedCards)) return "Flush";
         if (this.isStraight(sortedCards, cardReference)) return "Straight";
         if (this.findXOfAKind(cardReference, 3)) return "Three of a kind";
         if (this.findXPairs(cardReference, 2)) return "Two Pair";
@@ -74,15 +74,15 @@ export class PokerHand {
         });
         return consecutiveHops === 4;
     }
-    // private static isSameSuit(sortedCards: string): boolean {
-    //     let lastSuite: string = "";
-    //     let consecutiveSuits: number = 0;
-    //     sortedCards.forEach((card: string) => {
-    //     if (card[1] === lastSuite) consecutiveSuits++;
-    //         lastSuite = card[1];
-    //     });
-    //     return consecutiveSuits === 4;
-    // }
+    private static isSameSuit(sortedCards: string): boolean {
+        let lastSuite: string = "";
+        let consecutiveSuits: number = 0;
+        sortedCards.forEach((card: string) => {
+        if (card.suit === lastSuite) consecutiveSuits++;
+            lastSuite = card.suit;
+        });
+        return consecutiveSuits === 4;
+    }
 
     private static findHighestCardValue(sortedCards: any, cardHandInfo: any): string {
         let highCard: string = cardHandInfo.get(sortedCards[0].value);
