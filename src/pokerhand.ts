@@ -8,7 +8,7 @@ export class PokerHand {
         // if (this.findXOfAKind(cardReference, 4)) return "Four of a kind";
         // if (this.findXOfAKind(cardReference, 3) && this.findXPairs(cardReference, 1)) return "Full House";
         // if (this.isSameSuit(sortedCards)) return "Flush";
-        // if (this.isStraight(sortedCards, cardReference)) return "Straight";
+        if (this.isStraight(sortedCards, cardReference)) return "Straight";
         if (this.findXOfAKind(cardReference, 3)) return "Three of a kind";
         if (this.findXPairs(cardReference, 2)) return "Two Pair";
         if (this.findXPairs(cardReference, 1)) return "Pair";
@@ -65,15 +65,15 @@ export class PokerHand {
     private static findXOfAKind(cardInfo: any, x: number): boolean {
         return Array.from(cardInfo.values()).some((card: any) => card.Occurance === x);
     }
-    // private static isStraight(sortedCards: string, cardInfo: any): boolean {
-    //     let lastValue: number = 0;
-    //     let consecutiveHops: number = 0;
-    //     sortedCards.forEach((card: string) => {
-    //         if (cardInfo.get(card[0]).Rank === (lastValue - 1)) consecutiveHops++;
-    //         lastValue = cardInfo.get(card[0]).Rank;
-    //     });
-    //     return consecutiveHops === 4;
-    // }
+    private static isStraight(sortedCards: string, cardInfo: any): boolean {
+        let lastValue: number = 0;
+        let consecutiveHops: number = 0;
+        sortedCards.forEach((card: string) => {
+            if (cardInfo.get(card.value).Rank === (lastValue - 1)) consecutiveHops++;
+            lastValue = cardInfo.get(card.value).Rank;
+        });
+        return consecutiveHops === 4;
+    }
     // private static isSameSuit(sortedCards: string): boolean {
     //     let lastSuite: string = "";
     //     let consecutiveSuits: number = 0;
