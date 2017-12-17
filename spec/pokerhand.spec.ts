@@ -10,9 +10,9 @@ describe("Poker Hands", () => {
     it("should return one pair if only two cards have the same value", () => {
         expect(PokerHand.findRank("2C 4H 4S 8C AH")).toBe("Pair");
     });
-    // it("should return two pairs if two sets of cards have the same value", () => {
-    //     expect(PokerHand.findRank("2C 4H 4S 8C 8H")).toBe("Two Pair");
-    // });
+    it("should return two pairs if two sets of cards have the same value", () => {
+        expect(PokerHand.findRank("2C 4H 4S 8C 8H")).toBe("Two Pair");
+    });
     // it("should return three of a kind if 3 cards have the same value", () => {
     //     expect(PokerHand.findRank("2C 4H 4S 4C 8H")).toBe("Three of a kind");
     // });

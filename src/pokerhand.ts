@@ -10,7 +10,7 @@ export class PokerHand {
         // if (this.isSameSuit(sortedCards)) return "Flush";
         // if (this.isStraight(sortedCards, cardReference)) return "Straight";
         // if (this.findXOfAKind(cardReference, 3)) return "Three of a kind";
-        // if (this.findXPairs(cardReference, 2)) return "Two Pair";
+        if (this.findXPairs(cardReference, 2)) return "Two Pair";
         if (this.findXPairs(cardReference, 1)) return "Pair";
         return this.findHighestCardValue(sortedCards, cardReference);
     }
