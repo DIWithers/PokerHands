@@ -28,5 +28,8 @@ describe("Poker Hands", () => {
     it("should return four of a kind with 4 cards of the same value", () => {
         expect(PokerHand.findRank("2H 2S 2C 2D 5H")).toBe("Four of a kind");
     });
+    it("should return straight flush with 5 cards of the same suit with consecutive values", () => {
+        expect(PokerHand.findRank("2H 3H 4H 5H 6H")).toBe("Straight Flush");
+    });
 });
 
